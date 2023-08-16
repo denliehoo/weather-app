@@ -27,7 +27,7 @@ const SearchHistoryItem = (props) => {
       <div className="right">
         {time}
         <Button
-          onClick={() => handleSearchWeather(true, details)}
+          onClick={() => handleSearchWeather(details)}
           icon="search"
           loading={resultsLoading}
         />

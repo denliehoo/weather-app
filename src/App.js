@@ -6,6 +6,7 @@ import Button from "./components/UI/Button/Button";
 import { weatherSample } from "./utils/sampleData";
 import { getWeatherDetailsApi } from "./api";
 import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
+import AutoCompleteLocation from "./components/Weather/AutoCompleteLocation";
 
 function App() {
   const getLocalStorage = () => {
@@ -30,6 +31,8 @@ function App() {
   const [resultsLoading, setResultsLoading] = useState(false);
   const [history, setHistory] = useState(getLocalStorage());
   const [error, setError] = useState("");
+  const [cityDetails, setCityDetails] = useState(null);
+  const [resetAutoComplete, setResetAutoComplete] = useState(false);
 
   const handleCityChange = (event) => {
     setCity(event.target.value);
@@ -44,19 +47,20 @@ function App() {
     setError("");
     setCity("");
     setCountry("");
+    setCityDetails(null);
+    setResetAutoComplete(true);
     setWeather(null);
   };
   const handleDeleteHistory = () => {
     localStorage.removeItem("history");
     setHistory([]);
   };
-  const handleSearchWeather = async (haveGeocoding, details) => {
+  const handleSearchWeather = async (details) => {
     setResultsLoading(true);
     setError("");
-    const [isSuccess, res] = await getWeatherDetailsApi(haveGeocoding, details);
+    const [isSuccess, res] = await getWeatherDetailsApi(details);
+    console.log(isSuccess, res);
     if (!isSuccess) {
-      console.log(res); // the error
-      // handle the error accordingly....
       setError(res);
       setWeather(null);
       setResultsLoading(false);
@@ -85,35 +89,26 @@ function App() {
     <div>
       <h1>Today's Weather</h1>
       {/* search bar */}
+
       <div className="weather-input-container">
-        <label>
-          City:
-          <input
-            className="weather-input"
-            type="text"
-            value={city}
-            onChange={handleCityChange}
-          />
-        </label>
-        <br />
-        <label>
-          Country:
-          <input
-            className="weather-input"
-            type="text"
-            value={country}
-            onChange={handleCountryChange}
-          />
-        </label>
+        <AutoCompleteLocation
+          setCityDetails={setCityDetails}
+          resetAutoComplete={resetAutoComplete}
+          onResetAutoComplete={() => setResetAutoComplete(false)}
+        />
         <Button
-          onClick={() =>
-            handleSearchWeather(false, { city: city, country: country })
-          }
+          onClick={() => handleSearchWeather(cityDetails)}
           label="Search"
+          disabled={!cityDetails}
           loading={resultsLoading}
         />
 
-        <Button onClick={handleClear} label="Clear" />
+        <Button
+          onClick={handleClear}
+          label="Clear"
+          disabled={cityDetails || weather ? false : true}
+          // disabled={!cityDetails}
+        />
       </div>
       {/* error */}
       {error && <div className="error-container">Error: {error}</div>}
@@ -131,7 +126,11 @@ function App() {
       <div>
         <div className="search-history-header-container">
           <h1>Search History</h1>
-          <Button onClick={handleDeleteHistory} label="Delete History" />
+          <Button
+            onClick={handleDeleteHistory}
+            label="Delete History"
+            disabled={!history.length}
+          />
         </div>
         {history.length ? (
           history.map((details, index) => (

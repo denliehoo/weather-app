@@ -1,15 +1,13 @@
 /* Styles for the container holding the input fields */
 .weather-input-container {
   display: flex;
-  gap: 10px; /* Adjust the gap between the inputs as needed */
-  align-items: center; /* Align input vertically within the container */
+  gap: 10px;
+  align-items: center;
+  width: 100%;
 }
 
-/* Styles for the individual input fields */
-.weather-input {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+.weather-input-container > :first-child {
+  flex: 1;
 }
 .weather-display-container{
   height: 250px;

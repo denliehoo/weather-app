@@ -13,12 +13,12 @@ const Button = (props) => {
     return <i className={`fas ${iconClass}`}></i>;
   };
 
-  const { label, onClick, loading, icon } = props;
+  const { label, onClick, loading, icon, disabled } = props;
   return (
     <button
       className={`custom-button ${loading ? "loading" : ""}`}
       onClick={onClick}
-      disabled={loading}
+      disabled={loading || disabled}
     >
       {loading ? (
         <i className="fas fa-spinner fa-spin"></i>
