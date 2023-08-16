@@ -44,6 +44,7 @@ function App() {
     setError("");
     setCity("");
     setCountry("");
+    setWeather(null);
   };
   const handleDeleteHistory = () => {
     localStorage.removeItem("history");
@@ -73,7 +74,6 @@ function App() {
       ...history,
     ];
 
-    console.log(newHistory);
     localStorage.setItem("history", JSON.stringify(newHistory));
     setHistory(newHistory);
     setWeather(res);

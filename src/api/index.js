@@ -1,5 +1,6 @@
 import axios from "axios";
 import { formatDate } from "../components/utils/formatDate";
+import { capitalizeFirstOnly } from "../components/utils/transformText";
 
 const API_KEYS = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -12,7 +13,7 @@ const details ={
 }
 */
 // geolocation: https://openweathermap.org/api/geocoding-api
-// current weather: https://openweathermap.org/api/one-call-3#current
+// current weather: https://openweathermap.org/current#one
 export const getWeatherDetailsApi = async (haveGeocoding, details) => {
   try {
     const currentDate = formatDate(new Date());
@@ -32,18 +33,20 @@ export const getWeatherDetailsApi = async (haveGeocoding, details) => {
     }
 
     const res = await axios.get(
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${API_KEYS}`
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEYS}`
+      // `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${API_KEYS}`
     );
     console.log(res);
 
     const weatherDetails = {
-      city: city,
-      country: country,
-      main: res.data?.current?.weather[0]?.main,
-      description: res.data?.current?.weather[0]?.description,
-      temperatureLow: res.data?.current?.dew_point,
-      temperatureHigh: res.data?.current?.temp,
-      humidity: res.data?.current?.humidity,
+      city: capitalizeFirstOnly(city),
+      country: res.data?.sys?.country,
+      main: res.data?.weather[0]?.main,
+      description: capitalizeFirstOnly(res.data?.weather[0]?.description),
+      icon: res.data?.weather[0]?.icon,
+      temperatureLow: res.data?.main?.temp_min,
+      temperatureHigh: res.data?.main?.temp_max,
+      humidity: res.data?.main?.humidity,
       time: currentDate,
       lat: lat,
       lon: lon,

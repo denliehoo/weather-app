@@ -27,33 +27,51 @@ export const geocodingSample = [
 
 // https://api.openweathermap.org/data/3.0/onecall?lat=1.503555&lon=103.7495586&appid=API_KEY
 export const weatherSample = {
-  lat: 1.5036,
-  lon: 103.7496,
-  timezone: "Asia/Kuala_Lumpur",
-  timezone_offset: 28800,
-  current: {
-    dt: 1692151226,
-    sunrise: 1692140679,
-    sunset: 1692184468,
-    temp: 303.99,
-    feels_like: 310.99,
-    pressure: 1014,
-    humidity: 76,
-    dew_point: 299.26,
-    uvi: 5.03,
-    clouds: 27,
-    visibility: 10000,
-    wind_speed: 3.46,
-    wind_deg: 163,
-    wind_gust: 4.12,
-    weather: [
-      {
-        id: 802,
-        main: "Clouds",
-        description: "scattered clouds",
-        icon: "03d",
-      },
-    ],
+  coord: {
+    lon: 10.99,
+    lat: 44.34,
   },
-  // other irrelevant info...
+  weather: [
+    {
+      id: 501,
+      main: "Rain",
+      description: "moderate rain",
+      icon: "10d",
+    },
+  ],
+  base: "stations",
+  main: {
+    temp: 298.48,
+    feels_like: 298.74,
+    temp_min: 297.56,
+    temp_max: 300.05,
+    pressure: 1015,
+    humidity: 64,
+    sea_level: 1015,
+    grnd_level: 933,
+  },
+  visibility: 10000,
+  wind: {
+    speed: 0.62,
+    deg: 349,
+    gust: 1.18,
+  },
+  rain: {
+    "1h": 3.16,
+  },
+  clouds: {
+    all: 100,
+  },
+  dt: 1661870592,
+  sys: {
+    type: 2,
+    id: 2075663,
+    country: "IT",
+    sunrise: 1661834187,
+    sunset: 1661882248,
+  },
+  timezone: 7200,
+  id: 3163858,
+  name: "Zocca",
+  cod: 200,
 };
