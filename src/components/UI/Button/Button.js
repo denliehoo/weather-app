@@ -1,15 +1,32 @@
-import React, { useState } from "react";
-import "./Button.css"; // Import your CSS file for styling
+import "./Button.css";
 
 const Button = (props) => {
-  const { label, onClick, loading } = props;
+  const renderIcon = () => {
+    if (!icon) return null;
+
+    let iconClass = "";
+    if (icon === "delete") {
+      iconClass = "fa-trash-alt";
+    } else if (icon === "search") {
+      iconClass = "fa-search";
+    }
+    return <i className={`fas ${iconClass}`}></i>;
+  };
+
+  const { label, onClick, loading, icon } = props;
   return (
     <button
       className={`custom-button ${loading ? "loading" : ""}`}
       onClick={onClick}
       disabled={loading}
     >
-      {loading ? "Loading..." : label}
+      {loading ? (
+        <i className="fas fa-spinner fa-spin"></i>
+      ) : icon ? (
+        renderIcon()
+      ) : (
+        label
+      )}
     </button>
   );
 };

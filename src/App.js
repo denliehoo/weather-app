@@ -4,8 +4,8 @@ import SearchResult from "./components/Weather/SearchResults";
 import SearchHistoryItem from "./components/Weather/SearchHistoryItem";
 import Button from "./components/UI/Button/Button";
 import { weatherSample } from "./components/utils/sampleData";
-import { formatDate } from "./components/utils/formatDate";
-import { getWeatherApi, getWeatherDetailsApi } from "./api";
+import { getWeatherDetailsApi } from "./api";
+import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 
 function App() {
   const getLocalStorage = () => {
@@ -84,7 +84,6 @@ function App() {
   return (
     <div>
       <h1>Today's Weather</h1>
-      <hr />
       {/* search bar */}
       <div className="weather-input-container">
         <label>
@@ -106,39 +105,34 @@ function App() {
             onChange={handleCountryChange}
           />
         </label>
-        {/* <Button
-          onClick={handleSearchButton}
-          label="Search"
-          loading={resultsLoading}
-        /> */}
-        <button
+        <Button
           onClick={() =>
             handleSearchWeather(false, { city: city, country: country })
           }
-        >
-          Search
-        </button>
-        <button onClick={handleClear}>Clear</button>
+          label="Search"
+          loading={resultsLoading}
+        />
+
+        <Button onClick={handleClear} label="Clear" />
       </div>
       {/* error */}
-      {error && <div>Error: {error}</div>}
+      {error && <div className="error-container">Error: {error}</div>}
       {/* searched details */}
-      {/* make it so such that this always takes up e.g. 200 px of height so tha layout doesnt move around */}
-      {resultsLoading ? (
-        <div>Loading....</div>
-      ) : (
-        weather && <SearchResult details={weather} />
-      )}
+      <div
+        className={weather || resultsLoading ? "weather-display-container" : ""}
+      >
+        {resultsLoading ? (
+          <LoadingSpinner />
+        ) : (
+          weather && <SearchResult details={weather} />
+        )}
+      </div>
       {/* Search History */}
       <div>
-        <h1>Search History</h1>
-        <button onClick={handleDeleteHistory}>Delete History</button>
-        <hr />
-
-        {/* 3. User can find their records in search history, and can click search button to call api again. Can click
-delete button to remove the record.
-
-save long lat city, countr instead. refactor call api + setting of details*/}
+        <div className="search-history-header-container">
+          <h1>Search History</h1>
+          <Button onClick={handleDeleteHistory} label="Delete History" />
+        </div>
         {history.length ? (
           history.map((details, index) => (
             <SearchHistoryItem
@@ -147,10 +141,13 @@ save long lat city, countr instead. refactor call api + setting of details*/}
               handleSearchWeather={handleSearchWeather}
               setHistory={setHistory}
               history={history}
+              resultsLoading={resultsLoading}
             />
           ))
         ) : (
-          <div>No Records</div>
+          <div className="no-records">
+            <div className="no-records-text">No Records</div>
+          </div>
         )}
       </div>
     </div>
