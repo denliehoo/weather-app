@@ -75,15 +75,14 @@ function App() {
   return (
     <div>
       <h1>Today's Weather</h1>
-      {/* search bar */}
 
-      <div className="weather-input-container">
-        <AutoCompleteLocation
-          setCityDetails={setCityDetails}
-          resetAutoComplete={resetAutoComplete}
-          onResetAutoComplete={() => setResetAutoComplete(false)}
-          setError={setError}
-        />
+      <AutoCompleteLocation
+        setCityDetails={setCityDetails}
+        resetAutoComplete={resetAutoComplete}
+        onResetAutoComplete={() => setResetAutoComplete(false)}
+        setError={setError}
+      />
+      <div className="input-buttons-container">
         <Button
           onClick={() => handleSearchWeather(cityDetails)}
           label="Search"
@@ -95,7 +94,6 @@ function App() {
           onClick={handleClear}
           label="Clear"
           disabled={cityDetails || weather ? false : true}
-          // disabled={!cityDetails}
         />
       </div>
       {/* error */}

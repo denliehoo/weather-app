@@ -1,16 +1,22 @@
 /* Styles for the container holding the input fields */
-.weather-input-container {
+.input-buttons-container {
+  margin-top: 20px;
   display: flex;
   gap: 10px;
   align-items: center;
   width: 100%;
 }
-
-.weather-input-container > :first-child {
+.input-buttons-container> :first-of-type {
   flex: 1;
 }
+.input-buttons-container > :last-of-type {
+  flex: 1;
+}
+
 .weather-display-container{
   height: 250px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .error-container {
