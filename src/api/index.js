@@ -1,6 +1,6 @@
 import axios from "axios";
-import { formatDate } from "../components/utils/formatDate";
-import { capitalizeFirstOnly } from "../components/utils/transformText";
+import { formatDate } from "../utils/formatDate";
+import { capitalizeFirstOnly } from "../utils/transformText";
 
 const API_KEYS = process.env.REACT_APP_WEATHER_API_KEY;
 

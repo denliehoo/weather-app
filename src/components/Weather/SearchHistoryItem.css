@@ -4,11 +4,11 @@
     align-items: center;
     padding: 10px;
     border: 1px solid #ccc;
-    margin-bottom: -1px;
+    margin-bottom: -1px; /* Add negative margin to compensate for the top border */
   }
 
   .container:last-child {
-    margin-bottom: 0; 
+    margin-bottom: 0; /* Reset margin for the last item */
   }
   
   .left {

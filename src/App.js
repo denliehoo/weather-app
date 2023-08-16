@@ -3,7 +3,7 @@ import "./App.css";
 import SearchResult from "./components/Weather/SearchResults";
 import SearchHistoryItem from "./components/Weather/SearchHistoryItem";
 import Button from "./components/UI/Button/Button";
-import { weatherSample } from "./components/utils/sampleData";
+import { weatherSample } from "./utils/sampleData";
 import { getWeatherDetailsApi } from "./api";
 import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 
