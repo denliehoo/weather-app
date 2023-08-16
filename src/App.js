@@ -25,8 +25,6 @@ function App() {
     }
   };
 
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
   const [weather, setWeather] = useState(null);
   const [resultsLoading, setResultsLoading] = useState(false);
   const [history, setHistory] = useState(getLocalStorage());
@@ -34,19 +32,8 @@ function App() {
   const [cityDetails, setCityDetails] = useState(null);
   const [resetAutoComplete, setResetAutoComplete] = useState(false);
 
-  const handleCityChange = (event) => {
-    setCity(event.target.value);
-    setError("");
-  };
-
-  const handleCountryChange = (event) => {
-    setCountry(event.target.value);
-    setError("");
-  };
   const handleClear = () => {
     setError("");
-    setCity("");
-    setCountry("");
     setCityDetails(null);
     setResetAutoComplete(true);
     setWeather(null);
@@ -95,6 +82,7 @@ function App() {
           setCityDetails={setCityDetails}
           resetAutoComplete={resetAutoComplete}
           onResetAutoComplete={() => setResetAutoComplete(false)}
+          setError={setError}
         />
         <Button
           onClick={() => handleSearchWeather(cityDetails)}

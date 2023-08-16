@@ -76,9 +76,9 @@ export const getCityAutoCompleteOptionsApi = async (inputValue) => {
       label: `${city.name}, ${city.countryCode}`,
     }));
 
-    return { options };
+    return [true, { options }];
   } catch (error) {
     console.error("Error loading options:", error);
-    return { options: [] };
+    return [false, { options: [] }, error.message];
   }
 };

@@ -4,14 +4,22 @@ import { getCityAutoCompleteOptionsApi } from "../../api";
 
 const AutoCompleteLocation = (props) => {
   const [search, setSearch] = useState(null);
-  const { setCityDetails, resetAutoComplete, onResetAutoComplete } = props;
+  const { setCityDetails, resetAutoComplete, onResetAutoComplete, setError } =
+    props;
 
   const loadOptions = async (inputValue) => {
-    return await getCityAutoCompleteOptionsApi(inputValue);
+    const [isSuccess, options, err] = await getCityAutoCompleteOptionsApi(
+      inputValue
+    );
+    if (isSuccess) return options;
+    setError(err);
+    return options;
+    // return await getCityAutoCompleteOptionsApi(inputValue);
   };
 
   const handleOnChange = (searchData) => {
     setSearch(searchData);
+    setError("");
     setCityDetails(searchData);
   };
 
