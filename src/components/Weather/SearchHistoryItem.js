@@ -1,5 +1,6 @@
 import Button from "../UI/Button/Button";
 import "./SearchHistoryItem.css";
+
 const SearchHistoryItem = (props) => {
   const {
     details,
@@ -9,7 +10,7 @@ const SearchHistoryItem = (props) => {
     setHistory,
     resultsLoading,
   } = props;
-  const { city, country, lat, lon, time } = details;
+  const { city, country, time } = details;
 
   const handleDelete = () => {
     const i = num - 1;
@@ -21,18 +22,23 @@ const SearchHistoryItem = (props) => {
 
   return (
     <div className="container">
-      <div className="left">
-        {num}. {city}, {country}
+      <div className="location-time">
+        <div className="location">
+          {num}. {city}, {country}
+        </div>
+        <div className="time">{time}</div>
       </div>
-      <div className="right">
-        {time}
-        <Button
-          onClick={() => handleSearchWeather(details)}
-          icon="search"
-          loading={resultsLoading}
-        />
-
-        <Button onClick={handleDelete} icon="delete" />
+      <div className="button-container">
+        <div className="search-button">
+          <Button
+            onClick={() => handleSearchWeather(details)}
+            icon="search"
+            loading={resultsLoading}
+          />
+        </div>
+        <div className="delete-button">
+          <Button onClick={handleDelete} icon="delete" />
+        </div>
       </div>
     </div>
   );
