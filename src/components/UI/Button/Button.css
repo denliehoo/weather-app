@@ -1,0 +1,15 @@
+.custom-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .custom-button.loading {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
