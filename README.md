@@ -1,5 +1,7 @@
 # Weather Application
 
+Weather application that allows user to get the weather. Demo application deployed at: https://weather-app-f8904.web.app/
+
 ## Installation:
 
 1. In terminal: npm install
