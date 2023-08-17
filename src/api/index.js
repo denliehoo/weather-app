@@ -4,6 +4,7 @@ import { capitalizeFirstOnly } from "../utils/transformText";
 
 const WEATHER_API_KEYS = process.env.REACT_APP_WEATHER_API_KEY;
 const GEO_API_KEYS = process.env.REACT_APP_GEO_API_KEY;
+const IP_INFO_API_KEYS = process.env.REACT_APP_IP_INFO_API_KEY;
 
 // current weather: https://openweathermap.org/current#one
 export const getWeatherDetailsApi = async (details) => {
@@ -71,5 +72,30 @@ export const getCityAutoCompleteOptionsApi = async (inputValue) => {
   } catch (error) {
     console.error("Error loading options:", error);
     return [false, { options: [] }, error.message];
+  }
+};
+
+export const getUserLocationApi = async () => {
+  try {
+    const getUserIp = await axios.get("https://api.ipify.org?format=json");
+    const userIP = getUserIp.data.ip;
+
+    const getUserLocation = await axios.get(
+      `https://ipinfo.io/${userIP}/json?token=${IP_INFO_API_KEYS}`
+    );
+
+    const [lat, lon] = getUserLocation.data.loc.split(",");
+    const city = getUserLocation.data.city;
+
+    const location = {
+      lat: parseFloat(lat),
+      lon: parseFloat(lon),
+      city: city,
+    };
+
+    return [true, location];
+  } catch (error) {
+    console.error("Error:", error.message);
+    return [false, error.message];
   }
 };

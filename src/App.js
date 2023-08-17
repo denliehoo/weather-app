@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import SearchResult from "./components/Weather/SearchResults";
 import SearchHistoryItem from "./components/Weather/SearchHistoryItem";
 import Button from "./components/UI/Button/Button";
-import { getWeatherDetailsApi } from "./api";
+import { getUserLocationApi, getWeatherDetailsApi } from "./api";
 import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 import AutoCompleteLocation from "./components/Weather/AutoCompleteLocation";
 import Modal from "./components/UI/Modal/Modal";
@@ -31,6 +31,7 @@ function App() {
   const [cityDetails, setCityDetails] = useState(null);
   const [resetAutoComplete, setResetAutoComplete] = useState(false);
   const [deleteHistoryModal, setDeleteHistoryModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleClear = () => {
     setError("");
@@ -45,7 +46,7 @@ function App() {
     setDeleteHistoryModal(false);
   };
 
-  const handleSearchWeather = async (details) => {
+  const handleSearchWeather = async (details, addToHistory = true) => {
     setResultsLoading(true);
     setError("");
     const [isSuccess, res] = await getWeatherDetailsApi(details);
@@ -55,99 +56,119 @@ function App() {
       setResultsLoading(false);
       return;
     }
-    const newHistory = [
-      {
-        lat: res.lat,
-        lon: res.lon,
-        city: res.city,
-        country: res.country,
-        time: res.time,
-      },
-      ...history,
-    ];
-    localStorage.setItem("history", JSON.stringify(newHistory));
-    setHistory(newHistory);
+    if (addToHistory) {
+      const newHistory = [
+        {
+          lat: res.lat,
+          lon: res.lon,
+          city: res.city,
+          country: res.country,
+          time: res.time,
+        },
+        ...history,
+      ];
+      localStorage.setItem("history", JSON.stringify(newHistory));
+      setHistory(newHistory);
+    }
     setWeather(res);
     setResultsLoading(false);
   };
 
+  useEffect(() => {
+    const setWeatherFromCurrentLocation = async () => {
+      const [isSuccess, res] = await getUserLocationApi();
+      isSuccess ? handleSearchWeather(res, false) : setError(res);
+      setIsLoading(false);
+    };
+    setWeatherFromCurrentLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div>
-      <h1>Today's Weather</h1>
-
-      {/* Input data */}
-      <div className="app__search-input-container">
-        <AutoCompleteLocation
-          setCityDetails={setCityDetails}
-          resetAutoComplete={resetAutoComplete}
-          onResetAutoComplete={() => setResetAutoComplete(false)}
-          handleSearchWeather={handleSearchWeather}
-          setError={setError}
-        />
-        <Button
-          onClick={handleClear}
-          icon="cross"
-          disabled={cityDetails || weather ? false : true}
-        />
-      </div>
-
-      {/* Error */}
-      {error && <div className="app__error-container">Error: {error}</div>}
-
-      {/* Searched weather details */}
-      <div
-        className={
-          weather || resultsLoading ? "app__weather-display-container" : ""
-        }
-      >
-        {resultsLoading ? (
+    <React.Fragment>
+      {isLoading ? (
+        <div className="app__loading-container">
           <LoadingSpinner />
-        ) : (
-          weather && <SearchResult details={weather} />
-        )}
-      </div>
-
-      {/* Search History */}
-      <div>
-        <div className="app__search-history-header-container">
-          <h1>Search History</h1>
-          <Button
-            onClick={() => setDeleteHistoryModal(true)}
-            label="Delete History"
-            disabled={!history.length}
-          />
         </div>
-        {history.length ? (
-          history.map((details, index) => (
-            <SearchHistoryItem
-              key={index}
-              details={details}
-              num={index + 1}
-              handleSearchWeather={handleSearchWeather}
-              setHistory={setHistory}
-              history={history}
-              resultsLoading={resultsLoading}
-            />
-          ))
-        ) : (
-          <div className="app__no-records">
-            <div className="app__no-records-text">No records</div>
-            <div className="app__no-records-text">
-              To get started, select a city
-            </div>
-          </div>
-        )}
-      </div>
+      ) : (
+        <div>
+          <h1>Today's Weather</h1>
 
-      {deleteHistoryModal && (
-        <Modal
-          isOpen={deleteHistoryModal}
-          text={"Are you sure you want to delete all history records?"}
-          onClose={() => setDeleteHistoryModal(false)}
-          onConfirm={handleDeleteHistory}
-        />
+          {/* Input data */}
+          <div className="app__search-input-container">
+            <AutoCompleteLocation
+              setCityDetails={setCityDetails}
+              resetAutoComplete={resetAutoComplete}
+              onResetAutoComplete={() => setResetAutoComplete(false)}
+              handleSearchWeather={handleSearchWeather}
+              setError={setError}
+            />
+            <Button
+              onClick={handleClear}
+              icon="cross"
+              disabled={cityDetails || weather ? false : true}
+            />
+          </div>
+
+          {/* Error */}
+          {error && <div className="app__error-container">Error: {error}</div>}
+
+          {/* Searched weather details */}
+          <div
+            className={
+              weather || resultsLoading ? "app__weather-display-container" : ""
+            }
+          >
+            {resultsLoading ? (
+              <LoadingSpinner />
+            ) : (
+              weather && <SearchResult details={weather} />
+            )}
+          </div>
+
+          {/* Search History */}
+          <div>
+            <div className="app__search-history-header-container">
+              <h1>Search History</h1>
+              <Button
+                onClick={() => setDeleteHistoryModal(true)}
+                label="Delete History"
+                disabled={!history.length}
+              />
+            </div>
+            {history.length ? (
+              history.map((details, index) => (
+                <SearchHistoryItem
+                  key={index}
+                  details={details}
+                  num={index + 1}
+                  handleSearchWeather={handleSearchWeather}
+                  setHistory={setHistory}
+                  history={history}
+                  resultsLoading={resultsLoading}
+                />
+              ))
+            ) : (
+              <div className="app__no-records">
+                <div className="app__no-records-text">No records</div>
+                <div className="app__no-records-text">
+                  To get started, select a city
+                </div>
+              </div>
+            )}
+          </div>
+
+          {deleteHistoryModal && (
+            <Modal
+              isOpen={deleteHistoryModal}
+              text={"Are you sure you want to delete all history records?"}
+              onClose={() => setDeleteHistoryModal(false)}
+              onConfirm={handleDeleteHistory}
+            />
+          )}
+        </div>
       )}
-    </div>
+    </React.Fragment>
   );
 }
 

@@ -8,9 +8,11 @@ Weather application that allows user to get the weather. Demo application deploy
 2. Create .env in root folder with these details:
    - Weather API Keys from: https://openweathermap.org/api
    - Geolocation API Keys from: https://rapidapi.com/wirefreethought/api/geodb-cities
+   - IP Info API Keys from: https://ipinfo.io/
    ```Javascript
    REACT_APP_WEATHER_API_KEY=WEATHER_API_KEY_HERE
    REACT_APP_GEO_API_KEY=GEO_API_KEY_HERE
+   REACT_APP_IP_INFO_API_KEY=IP_INFO_API_KEY_HERE
    ```
 3. In terminal: npm start
 
@@ -33,6 +35,7 @@ Weather application that allows user to get the weather. Demo application deploy
 
    - Originally, the requirement was to input city and country separately and click a search button. Now, users only need to select a city.
    - Weather is automatically displayed after selecting a valid city, thus, reducing user errors.
+   - Furthermore, when user opens the page, the current weather based on their location is automatically displayed. This is achieved by first identifying their IP address, then using the ipinfo API to get an approximate location from that IP address, and finally showing them the weather for that estimated location. Users can choose to see other cities' weather after that.
 
 5. Clear Weather Display:
 
