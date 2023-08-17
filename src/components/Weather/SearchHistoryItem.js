@@ -14,9 +14,6 @@ const SearchHistoryItem = (props) => {
   } = props;
   const { city, country, time } = details;
 
-  const [modalText, setModalText] = useState("");
-  const [modalConfirmFunction, setModalConfirmFunction] = useState(null);
-
   const [searchModal, setSearchModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
 

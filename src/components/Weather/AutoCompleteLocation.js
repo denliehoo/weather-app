@@ -19,7 +19,6 @@ const AutoCompleteLocation = (props) => {
     if (isSuccess) return options;
     setError(err);
     return options;
-    // return await getCityAutoCompleteOptionsApi(inputValue);
   };
 
   const handleOnChange = (searchData) => {

@@ -5,24 +5,15 @@ import { capitalizeFirstOnly } from "../utils/transformText";
 const WEATHER_API_KEYS = process.env.REACT_APP_WEATHER_API_KEY;
 const GEO_API_KEYS = process.env.REACT_APP_GEO_API_KEY;
 
-/*
-const details ={
-    lat: "",
-    lon: "",
-    city: "",
-    country: ""
-}
-*/
 // current weather: https://openweathermap.org/current#one
 export const getWeatherDetailsApi = async (details) => {
   try {
     const currentDate = formatDate(new Date());
-    const { city, country, lat, lon } = details;
+    const { city, lat, lon } = details;
 
     const res = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEYS}`
     );
-    console.log(res);
 
     const weatherDetails = {
       city: city,

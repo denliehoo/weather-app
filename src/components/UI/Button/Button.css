@@ -1,19 +1,19 @@
 .custom-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 .custom-button:hover {
-  background-color: #0056b3; /* Change the color for the hover effect */
+  background-color: #0056b3;
 }
 .full-width {
   width: 100%;
 }
-  
+
 .custom-button.loading {
   background-color: #ccc;
   cursor: not-allowed;

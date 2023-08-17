@@ -18,9 +18,9 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
   width: 300px;
-  margin: 0 10px; /* Add margin on both sides */
+  margin: 0 10px;
 }
-  
+
 .close-button {
   position: absolute;
   top: 10px;

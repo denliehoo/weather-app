@@ -14,24 +14,23 @@
   flex-shrink: 0;
 }
 
-
-.weather-display-container{
+.weather-display-container {
   height: 260px;
   margin-top: 35px;
   margin-bottom: 60px;
 }
 
 .error-container {
-  background-color: #ffc0c0; 
-  border: 1px solid #e74c3c; 
+  background-color: #ffc0c0;
+  border: 1px solid #e74c3c;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 10px; 
-  color: #e74c3c; 
+  margin-top: 10px;
+  color: #e74c3c;
 }
 
-.search-history-header-container{
+.search-history-header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,12 +41,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 20px; 
-  height: 100%; 
+  padding-top: 20px;
+  height: 100%;
 }
 
 .no-records-text {
-  font-size: 20px; 
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
 }

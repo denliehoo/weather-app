@@ -3,7 +3,6 @@ import "./App.css";
 import SearchResult from "./components/Weather/SearchResults";
 import SearchHistoryItem from "./components/Weather/SearchHistoryItem";
 import Button from "./components/UI/Button/Button";
-import { weatherSample } from "./utils/sampleData";
 import { getWeatherDetailsApi } from "./api";
 import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 import AutoCompleteLocation from "./components/Weather/AutoCompleteLocation";
@@ -12,7 +11,6 @@ import Modal from "./components/UI/Modal/Modal";
 function App() {
   const getLocalStorage = () => {
     const storedData = localStorage.getItem("history");
-
     if (storedData) {
       try {
         const deserializedData = JSON.parse(storedData);
@@ -40,23 +38,23 @@ function App() {
     setResetAutoComplete(true);
     setWeather(null);
   };
+
   const handleDeleteHistory = () => {
     localStorage.removeItem("history");
     setHistory([]);
     setDeleteHistoryModal(false);
   };
+
   const handleSearchWeather = async (details) => {
     setResultsLoading(true);
     setError("");
     const [isSuccess, res] = await getWeatherDetailsApi(details);
-    console.log(isSuccess, res);
     if (!isSuccess) {
       setError(res);
       setWeather(null);
       setResultsLoading(false);
       return;
     }
-
     const newHistory = [
       {
         lat: res.lat,
@@ -67,11 +65,9 @@ function App() {
       },
       ...history,
     ];
-
     localStorage.setItem("history", JSON.stringify(newHistory));
     setHistory(newHistory);
     setWeather(res);
-
     setResultsLoading(false);
   };
 
@@ -79,6 +75,7 @@ function App() {
     <div>
       <h1>Today's Weather</h1>
 
+      {/* input data */}
       <div className="search-input-container">
         <AutoCompleteLocation
           setCityDetails={setCityDetails}
@@ -93,9 +90,11 @@ function App() {
           disabled={cityDetails || weather ? false : true}
         />
       </div>
+
       {/* error */}
       {error && <div className="error-container">Error: {error}</div>}
-      {/* searched details */}
+
+      {/* searched weather details */}
       <div
         className={weather || resultsLoading ? "weather-display-container" : ""}
       >
@@ -105,6 +104,7 @@ function App() {
           weather && <SearchResult details={weather} />
         )}
       </div>
+
       {/* Search History */}
       <div>
         <div className="search-history-header-container">
@@ -118,6 +118,7 @@ function App() {
         {history.length ? (
           history.map((details, index) => (
             <SearchHistoryItem
+              key={index}
               details={details}
               num={index + 1}
               handleSearchWeather={handleSearchWeather}
@@ -133,6 +134,7 @@ function App() {
           </div>
         )}
       </div>
+
       {deleteHistoryModal && (
         <Modal
           isOpen={deleteHistoryModal}
