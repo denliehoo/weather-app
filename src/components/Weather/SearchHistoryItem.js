@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../UI/Button/Button";
 import "./SearchHistoryItem.css";
 import Modal from "../UI/Modal/Modal";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 const SearchHistoryItem = (props) => {
   const {
@@ -16,6 +17,20 @@ const SearchHistoryItem = (props) => {
 
   const [searchModal, setSearchModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+
+  const { width } = useWindowSize();
+
+  const getLocationText = () => {
+    const locationText = `${num}. ${city}, ${country}`;
+
+    if (locationText.length <= 35) {
+      return locationText;
+    } else if (width > 660 && width < 840) {
+      return locationText.substring(0, 32) + "...";
+    } else {
+      return locationText;
+    }
+  };
 
   const handleDelete = () => {
     const i = num - 1;
@@ -33,14 +48,12 @@ const SearchHistoryItem = (props) => {
     setSearchModal(false);
   };
   return (
-    <div className="container">
-      <div className="location-time">
-        <div>
-          {num}. {city}, {country}
-        </div>
+    <div className="search-history-container">
+      <div className="location-time-container">
+        <div className="location-text">{getLocationText()}</div>
         <div>{time}</div>
       </div>
-      <div className="button-container">
+      <div className="history-item-buttons-container">
         <Button onClick={() => setSearchModal(true)} icon="search" />
         <Button onClick={() => setDeleteModal(true)} icon="delete" />
       </div>

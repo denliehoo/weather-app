@@ -1,4 +1,4 @@
-.container {
+.search-history-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,17 +7,17 @@
   border-bottom: none;
 }
 
-.container:last-child {
+.search-history-container:last-child {
   border-bottom: 1px solid #ccc;
 }
 
-.location-time {
+.location-time-container {
   display: flex;
   gap: 10px;
   align-items: baseline;
 }
 
-.button-container {
+.history-item-buttons-container {
   display: flex;
   gap: 10px;
   align-items: center;
@@ -25,12 +25,12 @@
 
 /* Media Query for screens below 660px */
 @media (max-width: 660px) {
-  .container {
+  .search-history-container {
     flex-direction: column;
     align-items: center;
   }
 
-  .location-time {
+  .location-time-container {
     gap: 0px;
     width: 100%;
     display: flex;
@@ -39,5 +39,9 @@
     align-items: center;
     padding: 5px 0;
     text-align: center;
+  }
+
+  .location-text{
+    font-weight: 700;
   }
 }

@@ -39,23 +39,23 @@ const SearchResult = (props) => {
             }}
           />
         )}
-        <div className={"weather-content"}>
+        <div className="weather-content">
           <div className="weather-info">
             <img
               src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
               alt={main}
             />
-            <div className="main">{main}</div>
+            <div className="weather-main">{main}</div>
           </div>
-          <div className="city-country">
+          <div className="weather-city-country">
             {city}, {country}
           </div>
-          <div className="description">Description: {description}</div>
-          <div className="temperature">
+          <div className="weather-description">Description: {description}</div>
+          <div className="weather-temperature">
             Temperature: {temperatureLow}°C~{temperatureHigh}°C
           </div>
-          <div className="humidity">Humidity: {humidity}%</div>
-          <div className="time">Time: {time}</div>
+          <div className="weather-humidity">Humidity: {humidity}%</div>
+          <div className="weather-time">Time: {time}</div>
         </div>
       </div>
     </React.Fragment>

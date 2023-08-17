@@ -17,9 +17,9 @@
   height: 100%;
   z-index: 2; /* ensures the transition animation covers the weather display contents*/
   background-position: -20px -20px;
-  animation: fadeOut 2s forwards;
+  animation: fade-out 2s forwards;
 }
-@keyframes fadeOut {
+@keyframes fade-out {
   0% {
     opacity: 1;
   }
@@ -43,24 +43,24 @@
   margin-right: 10px;
 }
 
-.main {
+.weather-main {
   font-size: 24px;
   font-weight: bold;
 }
 
-.city-country {
+.weather-city-country {
   font-size: 18px;
 }
 
-.description,
-.temperature,
-.humidity,
-.time {
+.weather-description,
+.weather-temperature,
+.weather-humidity,
+.weather-time {
   margin-top: 5px;
   font-size: 16px;
   color: #333;
 }
 
-.description {
+.weather-description {
   color: #666;
 }
