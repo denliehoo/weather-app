@@ -9,6 +9,8 @@ const Button = (props) => {
       iconClass = "fa-trash-alt";
     } else if (icon === "search") {
       iconClass = "fa-search";
+    } else if (icon === "cross") {
+      iconClass = "fa-xmark";
     }
     return <i className={`fas ${iconClass}`}></i>;
   };

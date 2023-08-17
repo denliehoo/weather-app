@@ -19,26 +19,24 @@ const SearchHistoryItem = (props) => {
     setHistory(newHistory);
     localStorage.setItem("history", JSON.stringify(newHistory));
   };
+  const handleSearch = () => {
+    window.scrollTo({
+      top: 0,
+    });
+    handleSearchWeather(details);
+  };
 
   return (
     <div className="container">
       <div className="location-time">
-        <div className="location">
+        <div>
           {num}. {city}, {country}
         </div>
-        <div className="time">{time}</div>
+        <div>{time}</div>
       </div>
       <div className="button-container">
-        <div className="search-button">
-          <Button
-            onClick={() => handleSearchWeather(details)}
-            icon="search"
-            loading={resultsLoading}
-          />
-        </div>
-        <div className="delete-button">
-          <Button onClick={handleDelete} icon="delete" />
-        </div>
+        <Button onClick={handleSearch} icon="search" loading={resultsLoading} />
+        <Button onClick={handleDelete} icon="delete" />
       </div>
     </div>
   );

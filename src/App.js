@@ -76,23 +76,17 @@ function App() {
     <div>
       <h1>Today's Weather</h1>
 
-      <AutoCompleteLocation
-        setCityDetails={setCityDetails}
-        resetAutoComplete={resetAutoComplete}
-        onResetAutoComplete={() => setResetAutoComplete(false)}
-        setError={setError}
-      />
-      <div className="input-buttons-container">
-        <Button
-          onClick={() => handleSearchWeather(cityDetails)}
-          label="Search"
-          disabled={!cityDetails}
-          loading={resultsLoading}
+      <div className="search-input-container">
+        <AutoCompleteLocation
+          setCityDetails={setCityDetails}
+          resetAutoComplete={resetAutoComplete}
+          onResetAutoComplete={() => setResetAutoComplete(false)}
+          handleSearchWeather={handleSearchWeather}
+          setError={setError}
         />
-
         <Button
           onClick={handleClear}
-          label="Clear"
+          icon="cross"
           disabled={cityDetails || weather ? false : true}
         />
       </div>
@@ -140,26 +134,3 @@ function App() {
 }
 
 export default App;
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;

@@ -4,8 +4,13 @@ import { getCityAutoCompleteOptionsApi } from "../../api";
 
 const AutoCompleteLocation = (props) => {
   const [search, setSearch] = useState(null);
-  const { setCityDetails, resetAutoComplete, onResetAutoComplete, setError } =
-    props;
+  const {
+    setCityDetails,
+    resetAutoComplete,
+    onResetAutoComplete,
+    setError,
+    handleSearchWeather,
+  } = props;
 
   const loadOptions = async (inputValue) => {
     const [isSuccess, options, err] = await getCityAutoCompleteOptionsApi(
@@ -21,6 +26,7 @@ const AutoCompleteLocation = (props) => {
     setSearch(searchData);
     setError("");
     setCityDetails(searchData);
+    handleSearchWeather(searchData);
   };
 
   useEffect(() => {

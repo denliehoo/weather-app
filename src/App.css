@@ -1,22 +1,24 @@
-/* Styles for the container holding the input fields */
-.input-buttons-container {
+.search-input-container {
   margin-top: 20px;
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
   width: 100%;
 }
-.input-buttons-container> :first-of-type {
-  flex: 1;
-}
-.input-buttons-container > :last-of-type {
-  flex: 1;
+
+.search-input-container > :first-child {
+  flex-grow: 1;
 }
 
+.search-input-container > :last-child {
+  flex-shrink: 0;
+}
+
+
 .weather-display-container{
-  height: 250px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  height: 260px;
+  margin-top: 35px;
+  margin-bottom: 35px;
 }
 
 .error-container {
