@@ -40,6 +40,7 @@ const SearchHistoryItem = (props) => {
     localStorage.setItem("history", JSON.stringify(newHistory));
     setDeleteModal(false);
   };
+
   const handleSearch = () => {
     window.scrollTo({
       top: 0,
@@ -47,14 +48,21 @@ const SearchHistoryItem = (props) => {
     handleSearchWeather(details);
     setSearchModal(false);
   };
+
   return (
-    <div className="search-history-container">
-      <div className="location-time-container">
-        <div className="location-text">{getLocationText()}</div>
+    <div className="search-history-item">
+      <div className="search-history-item__location-time">
+        <div className="search-history-item__location-text">
+          {getLocationText()}
+        </div>
         <div>{time}</div>
       </div>
-      <div className="history-item-buttons-container">
-        <Button onClick={() => setSearchModal(true)} icon="search" />
+      <div className="search-history-item__buttons">
+        <Button
+          onClick={() => setSearchModal(true)}
+          icon="search"
+          loading={resultsLoading}
+        />
         <Button onClick={() => setDeleteModal(true)} icon="delete" />
       </div>
       {searchModal && (

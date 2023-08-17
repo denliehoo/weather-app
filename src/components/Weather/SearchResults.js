@@ -29,33 +29,37 @@ const SearchResult = (props) => {
 
   return (
     <React.Fragment>
-      <div className="search-result-container">
+      <div className="search-result">
         {showTransition && (
           <div
-            className="transition-animation"
+            className="search-result__transition-animation"
             style={{
               backgroundImage: `url(https://openweathermap.org/img/wn/${icon}@2x.png)`,
               backgroundRepeat: "repeat",
             }}
           />
         )}
-        <div className="weather-content">
-          <div className="weather-info">
+        <div className="search-result__content">
+          <div className="search-result__weather-info">
             <img
               src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
               alt={main}
             />
-            <div className="weather-main">{main}</div>
+            <div className="search-result__weather-main">{main}</div>
           </div>
-          <div className="weather-city-country">
+          <div className="search-result__weather-city-country">
             {city}, {country}
           </div>
-          <div className="weather-description">Description: {description}</div>
-          <div className="weather-temperature">
+          <div className="search-result__weather-description">
+            Description: {description}
+          </div>
+          <div className="search-result__weather-temperature">
             Temperature: {temperatureLow}°C~{temperatureHigh}°C
           </div>
-          <div className="weather-humidity">Humidity: {humidity}%</div>
-          <div className="weather-time">Time: {time}</div>
+          <div className="search-result__weather-humidity">
+            Humidity: {humidity}%
+          </div>
+          <div className="search-result__weather-time">Time: {time}</div>
         </div>
       </div>
     </React.Fragment>

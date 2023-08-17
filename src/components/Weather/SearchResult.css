@@ -1,4 +1,4 @@
-.search-result-container {
+.search-result {
   border: 1px solid #ddd;
   padding: 15px;
   margin: 10px;
@@ -8,7 +8,7 @@
   position: relative;
 }
 
-.transition-animation {
+.search-result__transition-animation {
   position: absolute;
   background-color: #fff;
   top: 0;
@@ -28,39 +28,39 @@
   }
 }
 
-.weather-content {
+.search-result__content {
   position: relative;
   z-index: 1;
 }
 
-.weather-info {
+.search-result__weather-info {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.weather-info img {
+.search-result__weather-info img {
   margin-right: 10px;
 }
 
-.weather-main {
+.search-result__weather-main {
   font-size: 24px;
   font-weight: bold;
 }
 
-.weather-city-country {
+.search-result__weather-city-country {
   font-size: 18px;
 }
 
-.weather-description,
-.weather-temperature,
-.weather-humidity,
-.weather-time {
+.search-result__weather-description,
+.search-result__weather-temperature,
+.search-result__weather-humidity,
+.search-result__weather-time {
   margin-top: 5px;
   font-size: 16px;
   color: #333;
 }
 
-.weather-description {
+.search-result__weather-description {
   color: #666;
 }

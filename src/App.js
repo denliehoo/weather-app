@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import SearchResult from "./components/Weather/SearchResults";
 import SearchHistoryItem from "./components/Weather/SearchHistoryItem";
@@ -75,8 +75,8 @@ function App() {
     <div>
       <h1>Today's Weather</h1>
 
-      {/* input data */}
-      <div className="search-input-container">
+      {/* Input data */}
+      <div className="app__search-input-container">
         <AutoCompleteLocation
           setCityDetails={setCityDetails}
           resetAutoComplete={resetAutoComplete}
@@ -91,12 +91,14 @@ function App() {
         />
       </div>
 
-      {/* error */}
-      {error && <div className="error-container">Error: {error}</div>}
+      {/* Error */}
+      {error && <div className="app__error-container">Error: {error}</div>}
 
-      {/* searched weather details */}
+      {/* Searched weather details */}
       <div
-        className={weather || resultsLoading ? "weather-display-container" : ""}
+        className={
+          weather || resultsLoading ? "app__weather-display-container" : ""
+        }
       >
         {resultsLoading ? (
           <LoadingSpinner />
@@ -107,7 +109,7 @@ function App() {
 
       {/* Search History */}
       <div>
-        <div className="search-history-header-container">
+        <div className="app__search-history-header-container">
           <h1>Search History</h1>
           <Button
             onClick={() => setDeleteHistoryModal(true)}
@@ -128,9 +130,11 @@ function App() {
             />
           ))
         ) : (
-          <div className="no-records">
-            <div className="no-records-text">No records</div>
-            <div className="no-records-text">To get started, select a city</div>
+          <div className="app__no-records">
+            <div className="app__no-records-text">No records</div>
+            <div className="app__no-records-text">
+              To get started, select a city
+            </div>
           </div>
         )}
       </div>

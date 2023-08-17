@@ -1,4 +1,4 @@
-.search-history-container {
+.search-history-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,17 +7,17 @@
   border-bottom: none;
 }
 
-.search-history-container:last-child {
+.search-history-item:last-child {
   border-bottom: 1px solid #ccc;
 }
 
-.location-time-container {
+.search-history-item__location-time {
   display: flex;
   gap: 10px;
   align-items: baseline;
 }
 
-.history-item-buttons-container {
+.search-history-item__buttons {
   display: flex;
   gap: 10px;
   align-items: center;
@@ -25,12 +25,12 @@
 
 /* Media Query for screens below 660px */
 @media (max-width: 660px) {
-  .search-history-container {
+  .search-history-item {
     flex-direction: column;
     align-items: center;
   }
 
-  .location-time-container {
+  .search-history-item__location-time {
     gap: 0px;
     width: 100%;
     display: flex;
@@ -41,7 +41,7 @@
     text-align: center;
   }
 
-  .location-text{
+  .search-history-item__location-text {
     font-weight: 700;
   }
 }

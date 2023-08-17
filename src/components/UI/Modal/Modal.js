@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 
 const Modal = (props) => {
   const { isOpen, text, onConfirm, onClose, buttonLoading } = props;
+
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.keyCode === 27) {
@@ -31,11 +32,11 @@ const Modal = (props) => {
   return (
     <div className="modal-overlay" onClick={handleClickOutside}>
       <div className="modal">
-        <button className="close-button" onClick={onClose}>
+        <button className="modal__close-button" onClick={onClose}>
           &times;
         </button>
-        <div className="modal-content">
-          <p className="modal-text">{text}</p>
+        <div className="modal__content">
+          <p className="modal__text">{text}</p>
           <Button
             label="Confirm"
             onClick={onConfirm}

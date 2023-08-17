@@ -1,3 +1,4 @@
+import React from "react";
 import "./Button.css";
 
 const Button = (props) => {
@@ -18,8 +19,8 @@ const Button = (props) => {
   const { label, onClick, loading, icon, disabled, fullWidth } = props;
   return (
     <button
-      className={`custom-button ${loading ? "loading" : ""} ${
-        fullWidth ? "full-width" : ""
+      className={`button ${loading ? "button--loading" : ""} ${
+        fullWidth ? "button--full-width" : ""
       }`}
       onClick={onClick}
       disabled={loading || disabled}

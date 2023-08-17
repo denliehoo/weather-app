@@ -49,6 +49,7 @@
    - Individual records can be deleted using the delete icon button.
    - Users can also search for weather again based on search history.
 
-8. Responsive Design:
-
-   - Frontend is optimized for screen sizes with a width of 320px and above.
+8. Styling & Designs:
+   - CSS class names using BEM Convention.
+   - Responsive frontend which is optimized for screen sizes with a width of 320px and above.
+   - Created several reusable components (e.g. Modal, Button).
