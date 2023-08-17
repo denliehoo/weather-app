@@ -7,6 +7,7 @@ import { weatherSample } from "./utils/sampleData";
 import { getWeatherDetailsApi } from "./api";
 import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 import AutoCompleteLocation from "./components/Weather/AutoCompleteLocation";
+import Modal from "./components/UI/Modal/Modal";
 
 function App() {
   const getLocalStorage = () => {
@@ -31,6 +32,7 @@ function App() {
   const [error, setError] = useState("");
   const [cityDetails, setCityDetails] = useState(null);
   const [resetAutoComplete, setResetAutoComplete] = useState(false);
+  const [deleteHistoryModal, setDeleteHistoryModal] = useState(false);
 
   const handleClear = () => {
     setError("");
@@ -41,6 +43,7 @@ function App() {
   const handleDeleteHistory = () => {
     localStorage.removeItem("history");
     setHistory([]);
+    setDeleteHistoryModal(false);
   };
   const handleSearchWeather = async (details) => {
     setResultsLoading(true);
@@ -107,7 +110,7 @@ function App() {
         <div className="search-history-header-container">
           <h1>Search History</h1>
           <Button
-            onClick={handleDeleteHistory}
+            onClick={() => setDeleteHistoryModal(true)}
             label="Delete History"
             disabled={!history.length}
           />
@@ -125,10 +128,19 @@ function App() {
           ))
         ) : (
           <div className="no-records">
-            <div className="no-records-text">No Records</div>
+            <div className="no-records-text">No records</div>
+            <div className="no-records-text">To get started, select a city</div>
           </div>
         )}
       </div>
+      {deleteHistoryModal && (
+        <Modal
+          isOpen={deleteHistoryModal}
+          text={"Are you sure you want to delete all history records?"}
+          onClose={() => setDeleteHistoryModal(false)}
+          onConfirm={handleDeleteHistory}
+        />
+      )}
     </div>
   );
 }

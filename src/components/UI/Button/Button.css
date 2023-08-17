@@ -10,6 +10,9 @@
 .custom-button:hover {
   background-color: #0056b3; /* Change the color for the hover effect */
 }
+.full-width {
+  width: 100%;
+}
   
 .custom-button.loading {
   background-color: #ccc;

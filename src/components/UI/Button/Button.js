@@ -15,10 +15,12 @@ const Button = (props) => {
     return <i className={`fas ${iconClass}`}></i>;
   };
 
-  const { label, onClick, loading, icon, disabled } = props;
+  const { label, onClick, loading, icon, disabled, fullWidth } = props;
   return (
     <button
-      className={`custom-button ${loading ? "loading" : ""}`}
+      className={`custom-button ${loading ? "loading" : ""} ${
+        fullWidth ? "full-width" : ""
+      }`}
       onClick={onClick}
       disabled={loading || disabled}
     >

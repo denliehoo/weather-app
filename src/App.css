@@ -39,13 +39,15 @@
 
 .no-records {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 20px; /* Add padding on top */
-  height: 100%; /* Expand to full height of the parent container */
+  padding-top: 20px; 
+  height: 100%; 
 }
 
 .no-records-text {
-  font-size: 20px; /* Adjust font size as needed */
+  font-size: 20px; 
   font-weight: bold;
+  text-align: center;
 }
