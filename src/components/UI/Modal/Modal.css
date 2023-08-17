@@ -1,4 +1,3 @@
-/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -9,9 +8,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 4; /* ensure it covers everthing; highest order currently is 4*/
 }
 
-/* Modal Content */
 .modal {
   background-color: white;
   padding: 20px;
@@ -19,9 +18,9 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
   width: 300px;
-  margin: 0 10px; /* Add margin on both sides */}
-
-/* Close Button */
+  margin: 0 10px; /* Add margin on both sides */
+}
+  
 .close-button {
   position: absolute;
   top: 10px;
@@ -32,8 +31,6 @@
   cursor: pointer;
 }
 
-
-/* Modal Text */
 .modal-text {
   font-size: 18px;
   text-align: center;
